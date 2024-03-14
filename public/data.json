@@ -1,0 +1,30 @@
+{
+  "fields": [
+    {
+      "id": 1710437629042,
+      "name": "API",
+      "type": "dropdown",
+      "options": [
+        "api1",
+        "api2",
+        "api3"
+      ]
+    },
+    {
+      "id": 1710437629043,
+      "name": "Duration",
+      "type": "time"
+    },
+    {
+      "id": 1710438363786,
+      "name": "Count",
+      "type": "number"
+    },
+    {
+      "id": 1710438364416,
+      "name": "Date",
+      "type": "date"
+    }
+  ],
+  "rowNumber": 4
+}
