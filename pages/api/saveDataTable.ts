@@ -6,7 +6,7 @@ import path from 'path';
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
-      const filePath = path.join(process.cwd(), 'public', 'datatable.json');
+      const filePath = path.join(process.cwd(), 'data', 'datatable.json');
       const data = JSON.stringify(req.body, null, 2);
       fs.writeFileSync(filePath, data, 'utf8');
       res.status(200).json({ message: 'DataTable saved successfully' });

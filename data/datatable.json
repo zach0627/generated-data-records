@@ -1,14 +1,14 @@
 [
   {
-    "API": "api2"
+    "API": "API1",
+    "Duration": "21sec",
+    "Count": "4",
+    "Date": "2024-01-17"
   },
   {
-    "Duration": "1s"
-  },
-  {
-    "Count": "2"
-  },
-  {
-    "Date": "2024-03-15"
+    "API": "API2",
+    "Duration": "21sec",
+    "Count": "4",
+    "Date": "2024-01-17"
   }
 ]

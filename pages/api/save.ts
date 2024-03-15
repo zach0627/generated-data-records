@@ -4,7 +4,7 @@ import path from 'path';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
-    const filePath = path.join(process.cwd(), 'public', 'data.json');
+    const filePath = path.join(process.cwd(), 'data', 'data.json');
     try {
       fs.writeFileSync(filePath, JSON.stringify(req.body, null, 2));
       res.status(200).json({ message: '資料保存成功' });

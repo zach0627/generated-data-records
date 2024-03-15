@@ -5,9 +5,8 @@
       "name": "API",
       "type": "dropdown",
       "options": [
-        "api1",
-        "api2",
-        "api3"
+        "API1",
+        "API2"
       ]
     },
     {
@@ -16,12 +15,12 @@
       "type": "time"
     },
     {
-      "id": 1710438363786,
+      "id": 1710471438001,
       "name": "Count",
       "type": "number"
     },
     {
-      "id": 1710438364416,
+      "id": 1710472750923,
       "name": "Date",
       "type": "date"
     }

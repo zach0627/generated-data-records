@@ -6,7 +6,7 @@ import path from 'path';
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
-      const filePath = path.join(process.cwd(), 'public', 'datatable.json');
+      const filePath = path.join(process.cwd(), 'data', 'datatable.json');
       const data = fs.readFileSync(filePath, 'utf8');
       res.status(200).json(JSON.parse(data));
     } catch (error) {

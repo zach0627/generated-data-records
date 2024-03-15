@@ -14,7 +14,7 @@ interface DataRow {
 }
 
 export default function Home() {
-  const [rowNumber, setRowNumber] = useState<number>(1);
+  const [rowNumber, setRowNumber] = useState<number>(0);
   const [fields, setFields] = useState<Field[]>([]);
   const [dataRows, setDataRows] = useState<DataRow[]>([]); // 用於填寫資料
   const [tableDatas, setTableDatas] = useState<DataRow[]>([]); // 用於從 datatable.json 加載並顯示的資料
@@ -55,17 +55,20 @@ export default function Home() {
   }, [rowNumber]);
 
   useEffect(() => {
-    const initialRow = fields.reduce((acc: Record<string, any>, field) => {
-      // 對於下拉選單，可以設置初始值為第一個選項（如果有的話）
-      acc[field.name] =
-        field.type === "dropdown" && field.options && field.options.length > 0
-          ? field.options[0]
-          : "";
-      return acc;
-    }, {});
-
-    // 假設每次只填寫一條數據（即每次生成的表格只有一行）
-    setDataRows([initialRow]);
+    if(fields && fields.length > 0){
+      const initialRow = fields.reduce((acc: Record<string, any>, field) => {
+        // 對於下拉選單，可以設置初始值為第一個選項（如果有的話）
+        acc[field.name] =
+          field.type === "dropdown" && field.options && field.options.length > 0
+            ? field.options[0]
+            : "";
+        return acc;
+      }, {});
+  
+      // 假設每次只填寫一條數據（即每次生成的表格只有一行）
+      setDataRows([initialRow]);
+    }   
+    
   }, [fields]);
 
   const handleFieldNameChange = (id: number, name: string) => {
@@ -161,8 +164,7 @@ export default function Home() {
   // 生成 DataTable 並加載顯示
   const generateDataTable = async (e: React.FormEvent) => {
     e.preventDefault(); // 防止表單提交的默認行為
-    
-    const updatedTableDatas = [...tableDatas, ...dataRows];
+    const updatedTableDatas = tableDatas.length > 0 ? [...tableDatas, ...dataRows] : dataRows;
 
     // 將填寫的資料發送到後端以生成 datatable.json
     const saveRes = await fetch("/api/saveDataTable", {
@@ -194,7 +196,7 @@ export default function Home() {
             className="ml-4 w-20 h-10 text-center"
             value={rowNumber}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setRowNumber(parseInt(e.target.value) || 1)
+              setRowNumber(parseInt(e.target.value) || 0)
             }
           />
         </div>
@@ -273,7 +275,7 @@ export default function Home() {
         onSubmit={generateDataTable}
         className="mt-10 z-10 max-w-5xl w-full flex justify-start items-center gap-8 font-mono text-sm lg:flex"
       >
-        {fields.map((field, index) => (
+        {fields?.map((field, index) => (
           <div key={field.id} className="flex flex-col gap-4">
             <label>{field.name}</label>
             {field.type === "dropdown" ? (
